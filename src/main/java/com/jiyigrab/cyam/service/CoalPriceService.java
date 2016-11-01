@@ -8,4 +8,7 @@ public class CoalPriceService {
 	public void saveCoal(CoalPrice coalPrice){
 		coalPriceDao.saveCoal(coalPrice);
 	}
+	public String selectCoal(String date){
+		return coalPriceDao.selectCoal(date);
+	}
 }

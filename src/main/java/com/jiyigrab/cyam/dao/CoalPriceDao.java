@@ -1,6 +1,7 @@
 package com.jiyigrab.cyam.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.jiyigrab.cyam.jdbc.JDBCTools;
@@ -25,7 +26,29 @@ public class CoalPriceDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			JDBCTools.closeAll();
 		}
+	}
+	public String selectCoal(String date){
+		String sql = "select * from coalprice order by  id desc limit 1";
+		ResultSet rSet = JDBCTools.query(sql);
+		try {
+			while (rSet.next()) {
+				return rSet.getString("date");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			JDBCTools.closeAll();
+		}
+		return "";
 	}
 
 }

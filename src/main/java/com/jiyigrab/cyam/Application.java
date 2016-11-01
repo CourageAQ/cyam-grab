@@ -16,15 +16,15 @@ public class Application {
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 			public void run() {
-				if(string[1].equals("星期一") && Integer.valueOf(string[2])>=15 && Integer.valueOf(string[2])<=16) {
+				if(string[1].equals("星期三") && Integer.valueOf(string[2])>=15 && Integer.valueOf(string[2])<=16) {
 					System.out.println("开始执行");
 					new CoalPriceController().getHtml(string[0]);
 				}else {
-					System.out.println("今天不是星期一");
+					System.out.println("今天不是星期三");
 				}
-				
+				new CoalPriceController().getHtml(string[0]);
 			}
 		};
-		timer.schedule(task, date, 10000);
+		timer.schedule(task, date, 1000*30);
     }
 }
