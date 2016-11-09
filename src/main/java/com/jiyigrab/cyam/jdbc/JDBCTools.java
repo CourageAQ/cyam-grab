@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JDBCTools {
-	private static final String url = "jdbc:mysql://localhost:3306/testwang?unicode=true&characterEncoding=UTF-8";
-	private static final String username = "root";
-	private static final String password = "wenqiang";
+	private static final String url = "jdbc:jtds:sqlserver://localhost:1433/cyam";
+	private static final String username = "sa";
+	private static final String password = "abcd@1234";
 	private static Connection connection;
 	private static Statement statement;
 	private static ResultSet resultSet;
@@ -18,7 +18,7 @@ public class JDBCTools {
 	public static Connection getConn(){
 		try {
 			//1.加载驱动
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("net.sourceforge.jtds.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class CoalPrice {
 	private Long id;
-	private String heat;	//发热量
+	private int heat;	//发热量
 	private String nowpeace;//本期价格
 	private String lastpeace;//上期价格
 	private String Degree;		//涨幅度
@@ -19,10 +19,11 @@ public class CoalPrice {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getHeat() {
+	
+	public int getHeat() {
 		return heat;
 	}
-	public void setHeat(String heat) {
+	public void setHeat(int heat) {
 		this.heat = heat;
 	}
 	public String getNowpeace() {

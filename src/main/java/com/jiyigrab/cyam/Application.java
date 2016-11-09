@@ -9,22 +9,16 @@ import com.jiyigrab.cyam.controller.CoalPriceController;
 
 
 public class Application {
-	public static void runApplication(){
-		Date date = new Date();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd E HH");
-		String[] string = simpleDateFormat.format(date).split(" ");
+	public void runApplication(){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 			public void run() {
-				if(string[1].equals("星期三") && Integer.valueOf(string[2])>=15 && Integer.valueOf(string[2])<=16) {
-					System.out.println("开始执行");
+				String[] string = simpleDateFormat.format(new Date()).split(" ");
+					System.out.println(string[1] + "开始执行,每隔三十秒执行一次");
 					new CoalPriceController().getHtml(string[0]);
-				}else {
-					System.out.println("今天不是星期三");
-				}
-				new CoalPriceController().getHtml(string[0]);
 			}
 		};
-		timer.schedule(task, date, 1000*30);
+		timer.schedule(task, new Date(), 1000*30);
     }
 }

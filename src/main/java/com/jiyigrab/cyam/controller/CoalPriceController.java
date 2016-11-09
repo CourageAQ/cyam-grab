@@ -20,8 +20,8 @@ import com.jiyigrab.cyam.service.CoalPriceService;
 
 
 public class CoalPriceController {
-	Date console = new Date();
 	public  void getHtml(String datetime) {
+		Date console = new Date();
 		CoalPriceService coalPriceService = new CoalPriceService();
 		//1.创建HttpClient对象
 		HttpClientBuilder  httpClientBuilder = HttpClientBuilder.create();
@@ -43,7 +43,7 @@ public class CoalPriceController {
 				Document document = Jsoup.parse(response);
 				Elements elementhead =document.select("head").select("title");
 				if(!elementhead.text().equals("用户登录")){
-					String coalDate = coalPriceService.selectCoal(datetime);
+					String coalDate = coalPriceService.selectCoal(datetime).trim();
 					if (!coalDate.equals(datetime) || coalDate.equals("")) {
 					//获取table元素，从加载的信息中查找table标签
 					Elements element =document.select("table");
@@ -61,7 +61,7 @@ public class CoalPriceController {
 							tds[m]=tdpojo.text();
 						}
 						CoalPrice coalPrice = new CoalPrice();
-						coalPrice.setHeat(tds[0]);
+						coalPrice.setHeat(Integer.valueOf(tds[0]));
 						coalPrice.setNowpeace(tds[1]);
 						coalPrice.setLastpeace(tds[2]);
 						coalPrice.setDegree(tds[3]);
@@ -71,10 +71,10 @@ public class CoalPriceController {
 						coalPriceService.saveCoal(coalPrice);
 						}
 					}else{
-						System.out.println(console + "当前日期已获得数据");
+						System.out.println(console + "当前日期已获得数据！");
 					}
 				}else {
-					System.out.println(console + "当前日期没有发布数据");
+						System.out.println(console + "当前日期没有发布数据！");
 				}
 			}
 		} catch (ClientProtocolException e) {
@@ -82,7 +82,8 @@ public class CoalPriceController {
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("网络好像出了问题呀！请检查网络连接！");
 		}finally {
 			try {
 				//5关闭连接

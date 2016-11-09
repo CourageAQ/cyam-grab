@@ -14,7 +14,7 @@ public class CoalPriceDao {
 		String sql = "insert into coalprice (heat,nowpeace,lastpeace,Degree,huanbi,lasttime,tongbi,date) values (?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = (PreparedStatement) JDBCTools.getConn().prepareStatement(sql);
-			pstmt.setString(1, coalPrice.getHeat());
+			pstmt.setInt(1, coalPrice.getHeat());
 			pstmt.setString(2, coalPrice.getNowpeace());
 			pstmt.setString(3, coalPrice.getLastpeace());
 			pstmt.setString(4, coalPrice.getDegree());
@@ -36,7 +36,7 @@ public class CoalPriceDao {
 		}
 	}
 	public String selectCoal(String date){
-		String sql = "select * from coalprice order by  id desc limit 1";
+		String sql = "select top 1 * from coalprice order by id desc";
 		ResultSet rSet = JDBCTools.query(sql);
 		try {
 			while (rSet.next()) {
