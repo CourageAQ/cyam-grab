@@ -26,6 +26,7 @@
 	<dependency>
 		<groupId>org.apache.httpcomponents</groupId>
 		<artifactId>httpclient</artifactId>
+		<version>4.5.2</version>
 	</dependency>
 	<dependency>
 	    <groupId>commons-logging</groupId>
@@ -35,50 +36,10 @@
 	<dependency>
 	    <groupId>org.slf4j</groupId>
 	    <artifactId>slf4j-log4j12</artifactId>
+	     <version>1.7.21</version>
 	</dependency>
   </dependencies>
   <build>
     <finalName>grab</finalName>
-    <plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<!-- 打包jar文件，配置manifest文件，加入lib包的jar依赖  -->  
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<mainClass>com.jiyigrab.cyam.GrabApplication</mainClass>
-							<classpathPrefix>
-								dependency/
-							</classpathPrefix>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-			<!-- 拷贝依赖的jar包到lib目录 -->  
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
   </build>
-  <parent>
-  	<groupId>org.springframework.boot</groupId>
-  	<artifactId>spring-boot-starter-parent</artifactId>
-  	<version>1.3.6.RELEASE</version>
-  </parent>
 </project>
